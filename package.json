@@ -1,0 +1,36 @@
+{
+  "name": "glosstest",
+  "version": "1.0.0",
+  "description": "Theme created for Glosstech dev test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomozaidem/glosstest.git"
+  },
+  "keywords": [
+    "custom-background",
+    "custom-logo",
+    "custom-menu",
+    "featured-images",
+    "threaded-comments",
+    "translation-ready"
+  ],
+  "author": "Tomo Zaidem",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tomozaidem/glosstest/issues"
+  },
+  "homepage": "https://github.com/tomozaidem/glosstest#readme",
+  "devDependencies": {
+    "bootstrap": "^4.4.1",
+    "browser-sync": "^2.26.7",
+    "bxslider": "^4.2.14",
+    "gulp": "^4.0.2",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2"
+  }
+}
