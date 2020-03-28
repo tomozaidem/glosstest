@@ -1,0 +1,66 @@
+.cta-section {
+
+  &__wrap {
+    width: 100%;
+    clear: both;
+    background-color: #D70646;
+
+    &-inner {
+      max-width: 1298px;
+      width: 100%;
+      min-height: 188px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto;
+
+      @media (max-width: 481px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+
+    }
+  }
+
+  &__tagline {
+    text-align: left;
+    font-family: $font-family-base;
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 25px;
+    letter-spacing: 0;
+    color: #FFFFFF;
+
+    @media (max-width: 481px) {
+      text-align: center;
+      font-size: 25px;
+      line-height: 25px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__btn {
+    border: 2px solid #ffffff;
+    background-color: $primary;
+    font-family: $font-family-base;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 25px;
+    color: #ffffff;
+
+    @media (max-width: 481px) {
+      font-size: 25px;
+      line-height: 25px;
+      max-width: 300px;
+      padding: 0.875rem 2.5rem;
+    }
+
+    &:hover {
+      border: 2px solid #ffffff;
+      background-color: #ffffff;
+      color: $primary;
+    }
+  }
+}

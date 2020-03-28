@@ -16,8 +16,10 @@ get_header();
 
 $col = ( is_active_sidebar( 'sidebar-1' ) ) ? 'col-md-9':'col-md-12';
 ?>
+    <div id="content" class="site-content container">
+        <div class="row">
 
-    <div id="primary" class="content-area <?php echo $col; ?>">
+        <div id="primary" class="content-area <?php echo $col; ?>">
         <main id="main" class="site-main">
             <?php
             if ( have_posts() ) :
@@ -54,6 +56,8 @@ $col = ( is_active_sidebar( 'sidebar-1' ) ) ? 'col-md-9':'col-md-12';
         </main><!-- #main -->
     </div><!-- #primary -->
 
+        <?php get_sidebar(); ?>
+        </div>
+    </div>
 <?php
-get_sidebar();
 get_footer();

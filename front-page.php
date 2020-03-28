@@ -10,161 +10,71 @@ defined( 'ABSPATH' ) || die();
 
 get_header();
 
-get_template_part( 'templates/header/header', 'section' );
+if( have_rows('info_blocks') ):
+	$row = 0;
+	while ( have_rows('info_blocks') ) : the_row();
+		$row++;
+		$info_meta = array();
+		$info_meta['info_title'] = get_sub_field('info_title');
+		$info_meta['info_content'] = get_sub_field('info_content');
+		$info_meta['info_image'] = get_sub_field('info_image');
+		$info_meta['info_button_enabled'] = get_sub_field('info_button_enabled');
+		$info_meta['info_button_text'] = get_sub_field('info_button_text');
+		$info_meta['info_button_type'] = get_sub_field('info_button_type');
+		$info_meta['info_page_link'] = get_sub_field('info_page_link');
+		$info_meta['info_post_link'] = get_sub_field('info_post_link');
+		$info_meta['info_attachment_link'] = get_sub_field('info_attachment_link');
+		$info_meta['info_external_url'] = get_sub_field('info_external_url');
+		$info_meta['info_new_tab'] = get_sub_field('info_new_tab');
+		$info_meta['info_even'] = ( ($row % 2) == 0 ) ? true:false;
 
-//if ( have_posts() ) {
-//    while ( have_posts() ) {
-//        the_post();
-//        $post_id = get_the_ID();
-//
-//
-//        /* Introduction */
-//        $introduction = get_the_content();
-//        if ( $introduction ) { ?>
-<!--            <section class="introduction___content-wrap">-->
-<!--                <div class="container-fluid">-->
-<!--                    <div class="entry-content text-center">-->
-<!--                        --><?php //echo $introduction; ?>
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </section>-->
-<!--        --><?php //}
-//
-//        /* Home Page - Focus Buttons */
-//        $section_meta_service = qed_di( 'focus_button_section' );
-//        $section_meta 		  = $section_meta_service ? $section_meta_service->get_section_meta() : array();
-//
-//        $focus_buttons = $section_meta['focus_button_group'];
-//        $fb_contents   = array();
-//        $fb_count 	   = 0;
-//
-//        $focus_buttons_id = 'focus_buttons_' . $post_id;
-//
-//        if ( !empty($focus_buttons) ) { ?>
-<!--            <section class="home_focus_button__content-wrap">-->
-<!--                <div class="container">-->
-<!--                    <div class="focus-buttons">-->
-<!--                        <div class="focus-buttons__wrap focus-buttons__home-inner-wrap">-->
-<!--                            <section class="row focus-button__items">-->
-<!--                                --><?php //foreach ( $focus_buttons as $focus_button ) {
-//                                    $fb_count++;
-//                                    $class_focus_button = '';
-//
-//                                    if ( $fb_count == 1 || $fb_count == 4 ) {
-//                                        $class_focus_button = ' focus-button__sides';
-//                                    }
-//
-//                                    if ( $fb_count == 2 || $fb_count == 3 ) {
-//                                        $class_focus_button = ' focus-button__middle';
-//                                    }
-//
-//                                    // Use list to wrap focus buttons.
-//                                    $default_image = ! empty( $focus_button['focus_button_image'] ) ? $focus_button['focus_button_image']:'';
-//                                    $mobile_image = ! empty( $focus_button['focus_button_image_mobile'] ) ? $focus_button['focus_button_image_mobile']:'';
-//                                    $mobile_image = ( $mobile_image != '' ) ? $mobile_image : $default_image;
-//
-//                                    // Sides
-//                                    $class_sides_column = ( $fb_count == 1 || $fb_count == 4 ) ? 'col-md-4 focus-button__col ' : '';
-//
-//                                    if ( $fb_count == 2 ) {
-//                                        echo '<div class="col-md-4 col-xs-12 focus-button__col">';
-//                                    }
-//
-//                                    switch ( true ) {
-//                                        case 'external' === $focus_button['link_type']:
-//                                            printf( '<div class="%scol-xs-12 focus-button focus-button__item%s">
-//															<div class="focus-button">
-//																<div class="focus-button__image hidden-sm hidden-xs" style="background-image: url(%s)"></div>
-//																<div class="focus-button__image visible-block-sm visible-block-xs" style="background-image: url(%s)"></div>
-//																<div class="focus-button__overlay"></div>
-//
-//																<div class="focus-button__content focus-button__inactive">
-//																	<div class="middle-table">
-//																		<div class="middle-table-cell">
-//																			<h2 class="focus-button__title">%s</h2>
-//																		</div>
-//																	</div>
-//																</div>
-//
-//																<div class="focus-button__active">
-//																	<div class="focus-button__shape">
-//																		<div class="focus-button__curve"></div>
-//																	</div>
-//																	<div class="focus-button__content">
-//																		<div class="middle-table">
-//																			<div class="middle-table-cell">
-//																				<h2 class="focus-button__title"><span>%s<i></i></span></h2>
-//																			</div>
-//																		</div>
-//																	</div>
-//																</div>
-//
-//																<a class="focus-button__link" href="%s" target="_blank"></a>
-//															</div>
-//														</div>',
-//                                                $class_sides_column,
-//                                                $class_focus_button,
-//                                                $default_image,
-//                                                $mobile_image,
-//                                                $focus_button['focus_button_title'],
-//                                                $focus_button['focus_button_title'],
-//                                                esc_url( qed_vp_focus_button_link( $focus_button ) )
-//                                            );
-//                                            break;
-//                                        case 'page' === $focus_button['link_type']:
-//                                        case 'post' === $focus_button['link_type']:
-//                                        default:
-//                                            printf( '<div class="%scol-xs-12 focus-button focus-button__item%s">
-//															<div class="focus-button">
-//																<div class="focus-button__image hidden-sm hidden-xs" style="background-image: url(%s)"></div>
-//																<div class="focus-button__image visible-block-sm visible-block-xs" style="background-image: url(%s)"></div>
-//																<div class="focus-button__overlay"></div>
-//
-//																<div class="focus-button__content focus-button__inactive">
-//																	<div class="middle-table">
-//																		<div class="middle-table-cell">
-//																			<h2 class="focus-button__title">%s</h2>
-//																		</div>
-//																	</div>
-//																</div>
-//
-//																<div class="focus-button__active">
-//																	<div class="focus-button__shape">
-//																		<div class="focus-button__curve"></div>
-//																	</div>
-//																	<div class="focus-button__content">
-//																		<div class="middle-table">
-//																			<div class="middle-table-cell">
-//																				<h2 class="focus-button__title"><span>%s<i></i></span></h2>
-//																			</div>
-//																		</div>
-//																	</div>
-//																</div>
-//
-//																<a class="focus-button__link" href="%s"></a>
-//															</div>
-//														</div>',
-//                                                $class_sides_column,
-//                                                $class_focus_button,
-//                                                $default_image,
-//                                                $mobile_image,
-//                                                $focus_button['focus_button_title'],
-//                                                $focus_button['focus_button_title'],
-//                                                esc_url( qed_vp_focus_button_link( $focus_button ) )
-//                                            );
-//                                    }
-//
-//                                    if ( $fb_count == 3 ) {
-//                                        echo '</div>';
-//                                    }
-//                                } ?>
-<!--                            </section>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </section>-->
-<!--        --><?php //}
-//    }
-//}
+		gt_render_template_part( 'templates/home/info', 'block', $info_meta );
+
+	endwhile;
+
+endif;
+
+$team_args = array(
+	'post_type'   => 'gt_team_section',
+	'post_status' => 'publish',
+	'order'       => 'ASC'
+);
+
+$team_members = new WP_Query( $team_args );
+
+if( $team_members->have_posts() ) :?>
+
+<section class="team__wrap">
+	<div class="team__wrap-inner">
+		<h3 class="team__title">Lorem Ipsum Dolor Sit Amet</h3>
+		<h4 class="team__subtitle">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</h4>
+		<div class="team__section-wrap">
+			<?php
+			while( $team_members->have_posts() ) :
+				$team_members->the_post();
+				$member_id = get_the_ID();
+				$team_meta = array();
+
+				$team_meta['name'] = get_the_title();
+				$team_meta['position'] = get_field('position', $member_id);
+				$team_meta['image'] = get_field('image', $member_id);
+
+				gt_render_template_part( 'templates/home/team', 'block', $team_meta );
+			endwhile;
+			wp_reset_postdata();
+			?>
+		</div>
+	</div>
+</section>
+<?php
+endif;
+?>
+<section class="cta-section__wrap">
+	<div class="cta-section__wrap-inner">
+		<h5 class="cta-section__tagline">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</h5>
+		<a class="btn btn-outline-secondary btn-lg cta-section__btn" href="#">Improve Thinking</a>
+	</div>
+</section>
+<?php
 
 get_footer();

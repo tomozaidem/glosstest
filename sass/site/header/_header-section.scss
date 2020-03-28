@@ -1,0 +1,117 @@
+.header-section {
+  height: 640px;
+
+  @media (max-width: 481px) {
+    height: 378px;
+  }
+
+  &__content {
+
+    &-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 640px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @media (max-width: 481px) {
+        height: 378px;
+      }
+    }
+  }
+
+  &--with {
+
+    &-hero-banner {
+      position: relative;
+
+      &-wrap {
+        flex: 0 0 1298px;
+        width: 100%;
+        height: 640px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        @media (max-width: 481px) {
+          flex: 0 0 100%;
+          height: 378px;
+        }
+      }
+
+      &-content {
+        flex: 0 0 620px;
+
+        @media (max-width: 481px) {
+          flex: 0 0 100%;
+        }
+      }
+    }
+  }
+
+  &__simple {
+
+    &-image {
+      position: absolute;
+      width: 100%;
+      height: 640px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      z-index: -1;
+
+      @media (max-width: 481px) {
+        height: 378px;
+      }
+    }
+  }
+
+  &__title {
+    text-align: left;
+    font-family: $font-family-base;
+    font-weight: 500;
+    font-size: 64px;
+    line-height: 75px;
+    letter-spacing: 0;
+    color: #ffffff;
+    opacity: 1;
+
+    @media (max-width: 481px) {
+      text-align: center;
+      font-size: 32px;
+      line-height: 37px;
+    }
+  }
+
+  &__description {
+    text-align: left;
+    font-family: $font-family-base;
+    font-weight: 300;
+    font-size: 25px;
+    line-height: 29px;
+    letter-spacing: 0;
+    color: #ffffff;
+    opacity: 1;
+
+    @media (max-width: 481px) {
+      text-align: center;
+      font-size: 16px;
+      line-height: 19px;
+    }
+  }
+
+  .btn-primary {
+
+    @media (max-width: 481px) {
+      max-width: 300px;
+      font-size: 1.375rem;
+      line-height: 1.6875;
+      margin: 0 auto;
+      padding: 0.875rem 2.5rem;
+    }
+  }
+}

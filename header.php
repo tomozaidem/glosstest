@@ -10,6 +10,7 @@
 get_template_part( 'templates/header/header', 'clean' );
 ?>
 <header id="masthead" class="site-header header">
+    <div class="header__content-mobile-menu"></div>
     <div class="header__content-wrap">
         <div class="header__content">
             <div class="header__content-logo">
@@ -39,6 +40,5 @@ get_template_part( 'templates/header/header', 'clean' );
         </div>
     </div>
 </header><!-- #masthead -->
-
-<div id="content" class="site-content container">
-    <div class="row">
+<?php
+get_template_part( 'templates/header/header', 'section' );

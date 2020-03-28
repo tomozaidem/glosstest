@@ -7,17 +7,9 @@ const gulp        = require('gulp'),
 
 // compile scss into css
 function style() {
-    return gulp.src('./sass/**/*.scss')
+    return gulp.src('./sass/main.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(gulp.dest('./css'))
-}
-
-// minify js
-function js() {
-    return gulp.src(['./js/*.js'])
-        .pipe(rename({suffix: '.min'}))
-        .pipe(uglify())
-        .pipe(gulp.dest('./js'));
 }
 
 function watch() {
@@ -26,9 +18,7 @@ function watch() {
         proxy: 'http://localhost:8000',
     });
     gulp.watch('./sass/**/*.scss', style).on('change', reload);
-    gulp.watch('./js/*.js', js).on('change', reload);
 }
 
 exports.style = style;
-exports.js = js;
 exports.watch = watch;

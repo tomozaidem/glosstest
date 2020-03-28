@@ -48,22 +48,31 @@ if ( ! function_exists( 'glosstest_get_header_section_meta' ) ) {
 					return $section_meta;
 					break;
 				default:
-					$section_meta['hero_banner_title'] = get_field('hero_banner_title', $post_id);
-					$section_meta['hero_banner_subtitle'] = get_field('hero_banner_subtitle', $post_id);
-					$section_meta['hero_banner_image'] = get_field('hero_banner_image', $post_id);
-					$section_meta['hero_banner_image_mobile'] = get_field('hero_banner_image_mobile', $post_id);
-					$section_meta['hero_banner_button_enabled'] = get_field('hero_banner_button_enabled', $post_id);
-					$section_meta['hero_banner_button_text'] = ( $section_meta['hero_banner_button_enabled'] )? get_field('hero_banner_button_text', $post_id) : null;
-					$section_meta['hero_banner_button_type'] = ( $section_meta['hero_banner_button_enabled'] )? get_field('hero_banner_button_type', $post_id) : null;
-					$section_meta['hero_banner_page_link'] = ( $section_meta['hero_banner_button_enabled'] && $section_meta['hero_banner_button_type'] == 'page' )? get_field('hero_banner_page_link', $post_id) : null;
-					$section_meta['hero_banner_post_link'] = ( $section_meta['hero_banner_button_enabled'] && $section_meta['hero_banner_button_type'] == 'post' )? get_field('hero_banner_post_link', $post_id) : null;
-					$section_meta['hero_banner_attachment_link'] = ( $section_meta['hero_banner_button_enabled'] && $section_meta['hero_banner_button_type'] == 'attachment' )? get_field('hero_banner_attachment_link', $post_id) : null;
-					$section_meta['hero_banner_external_url'] = ( $section_meta['hero_banner_button_enabled'] && $section_meta['hero_banner_button_type'] == 'external' )? get_field('hero_banner_external_url', $post_id) : null;
-					$section_meta['hero_banner_new_tab'] = ( $section_meta['hero_banner_button_enabled'] )? get_field('hero_banner_new_tab', $post_id) : null;
+
 					return $section_meta;
 			}
 		}
 		return false;
+	}
+}
+
+if ( ! function_exists( 'gt_render_template_part' ) ) {
+	/**
+	 * Analog for the get_template_part function.
+	 * Allows pass params to view file.
+	 *
+	 * @param  string  $template_name    view name.
+	 * @param  string  $template_postfix optional postfix.
+	 * @param  array   $data            assoc array with variables that should be passed to view.
+	 * @param  boolean $return          if result should be returned instead of outputting.
+	 * @return string
+	 */
+	function gt_render_template_part( $template_name, $template_postfix = '', array $data = array(), $return = false ) {
+		static $app;
+		if ( ! $app ) {
+			$app = gt_di( 'app' );
+		}
+		return $app->render_template_part( $template_name, $template_postfix, $data, $return );
 	}
 }
 
@@ -98,3 +107,26 @@ function glosstest_pingback_header() {
 	}
 }
 add_action( 'wp_head', 'glosstest_pingback_header' );
+
+function gt_split_title( $title, $return_html = true ) {
+	$title 		= esc_html( $title );
+	$title 		= trim( preg_replace( '/\s+/', ' ', $title ) );
+
+	$words 		= explode( ' ', $title );
+	$word_count = count($words);
+
+	$divisor 	= $word_count / 2;
+	$word_len 	= round( $divisor, 0, PHP_ROUND_HALF_UP );
+
+	$array1 	= array_slice( $words, 0, $word_len );
+	$string1 	= trim( implode( ' ', $array1 ) );
+
+	$array2 	= array_slice( $words, $word_len );
+	$string2 	= trim( implode( ' ', $array2 ) );
+
+	if ( $return_html ) {
+		return $string1 . ' <span>' . $string2 . '</span>';
+	} else {
+		return array( $string1, $string2 );
+	}
+}
