@@ -10,25 +10,24 @@
  */
 
 ?>
+    </div><!-- .row -->
+</div><!-- #content .container -->
 
-	</div><!-- #content -->
-
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'glosstest' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'glosstest' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'glosstest' ), 'glosstest', '<a href="https://github.com/tomozaidem">Tomo Zaidem</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+<footer id="colophon" class="site-footer">
+    <div class="site-info">
+        <a href="<?php echo esc_url( __( 'https://wordpress.org/', 'glosstest' ) ); ?>">
+            <?php
+            /* translators: %s: CMS name, i.e. WordPress. */
+            printf( esc_html__( 'Proudly powered by %s', 'glosstest' ), 'WordPress' );
+            ?>
+        </a>
+        <span class="sep"> | </span>
+            <?php
+            /* translators: 1: Theme name, 2: Theme author. */
+            printf( esc_html__( 'Theme: %1$s by %2$s.', 'glosstest' ), 'glosstest', '<a href="https://github.com/tomozaidem">Tomo Zaidem</a>' );
+            ?>
+    </div><!-- .site-info -->
+</footer><!-- #colophon -->
 
 <?php wp_footer(); ?>
 

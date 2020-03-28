@@ -1,59 +1,44 @@
 <?php
 /**
- * The header for our theme
+ * Header template part.
  *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package Gloss_Dev_Test
+ * @author    Tomo Zaidem
+ * @package   Gloss_Dev_Test
+ * @version   1.0.0
  */
 
+get_template_part( 'templates/header/header', 'clean' );
 ?>
-<!doctype html>
-<html <?php language_attributes(); ?>>
-<head>
-	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="profile" href="https://gmpg.org/xfn/11">
+<header id="masthead" class="site-header header">
+    <div class="header__content-wrap">
+        <div class="header__content">
+            <div class="header__content-logo">
+                <a class="header__content-logo-link" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+                    <?php get_template_part( 'templates/header/logo' ); ?>
+                </a>
+            </div>
+            <div class="header__content-details">
+                <div class="header__content-details-top">
+                    <ul class="social-icons">
+                        <li class="social-icons__item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li class="social-icons__item"><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+                <div class="header__content-details-bottom">
+                    <div class="header__content-details-nav">
+                        <?php wp_nav_menu(array(
+                            'theme_location' => 'main-menu',
+                            'container' => 'ul',
+                            'menu_class' => 'main-menu',
+                            'menu_id' => 'navigation',
+                            'depth' => 3,
+                        )); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header><!-- #masthead -->
 
-	<?php wp_head(); ?>
-</head>
-
-<body <?php body_class(); ?>>
-<?php wp_body_open(); ?>
-<div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'glosstest' ); ?></a>
-
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$glosstest_description = get_bloginfo( 'description', 'display' );
-			if ( $glosstest_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $glosstest_description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'glosstest' ); ?></button>
-			<?php
-			wp_nav_menu( array(
-				'theme_location' => 'menu-1',
-				'menu_id'        => 'primary-menu',
-			) );
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
-
-	<div id="content" class="site-content">
+<div id="content" class="site-content container">
+    <div class="row">
